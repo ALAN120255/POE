@@ -1,17 +1,17 @@
-#Cybersecurity Awareness Chatbot
+Cybersecurity Awareness Chatbot
 
 Hey! Welcome to my project's ReadME.
 
-##A chatbot that helps you tackle any cyber threats
+A chatbot that helps you tackle any cyber threats
 
-##Brief description
+Brief description
 
 This project is mainly an AI/chatbot that supports the user's cyber well-being, 
 making their lives more easier.
 
-##Features
+Features
 
-###Function
+Function:
 
 Firstly, the program begins by welcoming the user, making it user-friendly, and engaging.
 Just as an actual person asks your name to demonstrate their interest in getting to know you, so does the chatbot.
