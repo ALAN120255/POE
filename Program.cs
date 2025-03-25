@@ -16,8 +16,8 @@ namespace POEDraft
                 "My purpose is to help you tackle every cyber threat you face. What issues are you currently facing?",
                 "Phishing is a type of cyber attack where attackers trick people into revealing sensitive information, such as passwords, credit card numbers, or personal details. They often do this by disguising themselves as trustworthy entities, like banks, social media platforms, or government agencies.",
                 "Strong passwords are your first line of defense. Use a mix of uppercase, lowercase, numbers, and symbols. Avoid using personal information, and never reuse passwords across different accounts. Consider using a password manager to help you create and store complex passwords securely.",
-                "I'm good, thanks and you?",
-                "Great! How can I assist you?",
+                "I'm doing well, thanks and you?",
+                "That's good to hear! How can I assist you?",
                 "Oh no! What could be the issue? Is it cyber related?"
             };
 
@@ -59,7 +59,7 @@ namespace POEDraft
                     }
                     else if (ValidateUserInput(response, "thank you"))
                     {
-                        DisplayMessage("You're welcome.", ConsoleColor.Green);
+                        DisplayMessage($"It is my sincere pleasure, {username}.", ConsoleColor.Green);
                     }
                     else if (ValidateUserInput(response, "how are you"))
                     {
