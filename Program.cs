@@ -30,10 +30,16 @@ namespace POEDraft
 
                 DisplayMessage($"Hello, {username}. How may I assist you with cybersecurity today?", ConsoleColor.Green);
 
+                /*
+                 * This variable storing a boolean expression is the key to the functioning of the program.
+                 * The program will continue to run if the boolean expression is true. When it is false, the
+                 * program will come to a full stop with the help of the break statement below. When the
+                 * break statement is implemented [in a loop, of course], the iteration comes to a complete stop.
+                 */
+
                 bool chatbotConversation = true;
                 while (chatbotConversation)
                 {
-
                     Console.Write($"{username}: ");
                     string response = StoresUserInput();
 
@@ -42,7 +48,7 @@ namespace POEDraft
                     {
                         EndConversation();//Contains conversation ending message
                         chatbotConversation = false;//Ends the loop
-                        continue;
+                        break;
                     }
 
                     if (ValidateUserInput(response, "phishing"))
@@ -106,7 +112,11 @@ namespace POEDraft
             return input;//Stores data into the method using this variable
         }
 
-        //Displays message of the chatbot
+        /*
+         * Displays message of the chatbot by parsing the message of the chatbot
+         * into the message variable. The color variable, however, determines the color
+         * of the message displayed by the chatbot.
+         */
         static void DisplayMessage(string message, ConsoleColor color)
         {
             Console.ForegroundColor = color;
