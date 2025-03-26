@@ -11,10 +11,6 @@ A chatbot designed to help users tackle cyber threats and improve cybersecurity 
 - ✅ **Context Awareness**: Handles greetings like "How are you?" with human-like responses.
 
 ## 🛠️ Technologies Used
-- **Programming Language**: [Specify here, e.g., Python, C#]
-- **Libraries**: [Specify any libraries used, e.g., NLTK, GPT-3 API]
+- **Programming Language**: [C#]
 
-## 📖 How to Run
-1. Clone the repository:  
-   ```sh
-   git clone https://github.com/your-repo/cybersecurity-chatbot.git
+
