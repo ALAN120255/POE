@@ -13,4 +13,9 @@ A chatbot designed to help users tackle cyber threats and improve cybersecurity 
 ## 🛠️ Technologies Used
 - **Programming Language**: [C#]
 
+## ⚙️ How it works
+1. After displaying the program's logo and emits an introduction voice recording,
+   the chatbot greets the user and prompts them to enter a username. The username is then    used throughout the dialogue. **NB: The dialogue will not go further if user does not enter an input.**
+2. The 
+
 
