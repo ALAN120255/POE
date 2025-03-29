@@ -24,6 +24,6 @@ A chatbot designed to help users tackle cyber threats and improve cybersecurity 
 The program only gives advices on phishing and password strengthening for now😬, but improvements will be made over time. If you have any suggestions, please let me know.
 
 ## 🏁 Conclusion
-This program is a great experience! Try it out!😉
+**This program is a great experience! Try it out!😉**
 
 
