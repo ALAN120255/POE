@@ -1,162 +1,119 @@
-﻿using System;
-using System.Linq;
+﻿using POE;
 using POEPart1;
+using System.Drawing;
 
-namespace POEDraft
+public class Program
 {
-    public class Program
+    static ConsoleTypingEffect consoleTyping = new ConsoleTypingEffect();
+    static VoiceGreeting voiceGreeting = new VoiceGreeting();
+
+    static void ChatbotInterface()
     {
-        static ConsoleTypingEffect consoleTyping = new ConsoleTypingEffect();
-        static VoiceGreeting voiceGreeting = new VoiceGreeting();
-
-        static void ChatbotInterface()
+        Dictionary<string, string> chatbotResponses = new Dictionary<string, string>()
         {
-            List<string> chatbotResponses = new List<string>()
+            { "purpose", "My purpose is to help you tackle every cyber threat you face. What issues are you currently facing?" },
+            { "phishing", "Phishing is a type of cyber attack where attackers trick people into revealing sensitive information, such as passwords, credit card numbers, or personal details. They often do this by disguising themselves as trustworthy entities, like banks, social media platforms, or government agencies." },
+            { "password", "Strong passwords are your first line of defense. Use a mix of uppercase, lowercase, numbers, and symbols. Avoid using personal information, and never reuse passwords across different accounts. Consider using a password manager to help you create and store complex passwords securely." },
+            { "How are you", "I'm doing well, thanks and you?" },
+            { "you good", "I'm doing well, thanks and you?" },
+            { "I'm okay", "That's good to hear! How can I assist you?" },
+            { "I'm alright", "That's good to hear! How can I assist you?" },
+            { "I'm good", "That's good to hear! How can I assist you?" },
+            { "I'm not okay", "Oh no! What could be the issue? Is it cyber related?" },
+            { "I'm not good", "Oh no! What could be the issue? Is it cyber related?" },
+            { "I'm not feeling well", "Oh no! What could be the issue? Is it cyber related?" },
+            { "I'm not feeling okay", "Oh no! What could be the issue? Is it cyber related?" },
+            { "I'm not feeling good", "I know what you need, you just need help with cybersecurity!" },
+        };
+
+        try
+        {
+            DisplayMessage("Before we go any further, let's get to know each other. I'm Chatbot, and you are?", ConsoleColor.Green);
+            string username = StoresUserInput();
+
+            string goodbyeMessage = "goodbye";
+
+            DisplayMessage($"Hello, {username}. How may I assist you with cybersecurity today?", ConsoleColor.Green);
+
+            bool chatbotConversation = true;
+            while (chatbotConversation)
             {
-                "My purpose is to help you tackle every cyber threat you face. What issues are you currently facing?",
-                "Phishing is a type of cyber attack where attackers trick people into revealing sensitive information, such as passwords, credit card numbers, or personal details. They often do this by disguising themselves as trustworthy entities, like banks, social media platforms, or government agencies.",
-                "Strong passwords are your first line of defense. Use a mix of uppercase, lowercase, numbers, and symbols. Avoid using personal information, and never reuse passwords across different accounts. Consider using a password manager to help you create and store complex passwords securely.",
-                "I'm doing well, thanks and you?",
-                "That's good to hear! How can I assist you?",
-                "Oh no! What could be the issue? Is it cyber related?"
-            };
+                Console.Write($"{username}: ");
+                string response = StoresUserInput();
 
-            try
-            {
-                DisplayMessage("Before we go any further, let's get to know each other. I'm Chatbot, and you are?", ConsoleColor.Green);
-                string username = StoresUserInput();
-
-                string goodbyeMessage = "goodbye";
-
-                DisplayMessage($"Hello, {username}. How may I assist you with cybersecurity today?", ConsoleColor.Green);
-
-                /*
-                 * This variable storing a boolean expression is the key to the functioning of the program.
-                 * The program will continue to run if the boolean expression is true. When it is false, the
-                 * program will come to a full stop with the help of the break statement below. When the
-                 * break statement is implemented [in a loop, of course], the iteration comes to a complete stop.
-                 */
-
-                bool chatbotConversation = true;
-                while (chatbotConversation)
+                if (ValidateUserInput(response, "goodbye"))
                 {
-                    Console.Write($"{username}: ");
-                    string response = StoresUserInput();
-
-                    //The conversation ends when the user enters goodbye
-                    if (ValidateUserInput(response, "goodbye"))
-                    {
-                        EndConversation();//Contains conversation ending message
-                        chatbotConversation = false;//Ends the loop
-                        break;
-                    }
-
-                    if (ValidateUserInput(response, "phishing"))
-                    {
-                        DisplayMessage(chatbotResponses[1], ConsoleColor.Green);
-                    }
-                    else if (ValidateUserInput(response, "password"))
-                    {
-                        DisplayMessage(chatbotResponses[2], ConsoleColor.Green);
-                    }
-                    else if (ValidateUserInput(response, "purpose"))
-                    {
-                        DisplayMessage(chatbotResponses[0], ConsoleColor.Green);
-                    }
-                    else if (ValidateUserInput(response, "thank you"))
-                    {
-                        DisplayMessage($"It is my sincere pleasure, {username}.", ConsoleColor.Green);
-                    }
-                    else if (ValidateUserInput(response, "how are you"))
-                    {
-                        DisplayMessage(chatbotResponses[3], ConsoleColor.Green);
-
-                        Console.Write($"{username}: ");
-                        response = StoresUserInput();
-
-                        if (ValidateUserInput(response, "I'm good") || ValidateUserInput(response, "I'm okay"))
-                        {
-                            DisplayMessage(chatbotResponses[4], ConsoleColor.Green);
-                        }
-                        else if (ValidateUserInput(response, "I'm not good") || ValidateUserInput(response, "I'm not okay"))
-                        {
-                            DisplayMessage(chatbotResponses[5], ConsoleColor.Magenta);
-                        }
-                        else
-                        {
-                            DisplayMessage($"I do not understand your input, {username}", ConsoleColor.DarkYellow);
-                        }
-                    }
-                    else
-                    {
-                        DisplayMessage("I cannot provide any information concerning that, but you can ask about phishing, passwords, or my purpose.", ConsoleColor.Yellow);
-                    }
+                    EndConversation();
+                    chatbotConversation = false;
+                    break;
                 }
+
+                CheckKeyword(response, chatbotResponses);
             }
-            catch (FormatException ex)
+        }
+        catch (FormatException ex)
+        {
+            DisplayMessage(ex.Message, ConsoleColor.Red);
+        }
+    }
+
+    static string StoresUserInput()
+    {
+        string input = Console.ReadLine();
+
+        while (string.IsNullOrEmpty(input))
+        {
+            DisplayMessage("Please enter a valid input", ConsoleColor.Red);
+            input = Console.ReadLine();
+        }
+        return input;
+    }
+
+    static void DisplayMessage(string message, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        Console.Write("Chatbot:");
+        consoleTyping.TypingEffect(message);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+
+    static bool CheckKeyword(string response, Dictionary<string, string> chatbotResponses)
+    {
+        bool keywordFound = false;
+        foreach (var keyword in chatbotResponses.Keys)
+        {
+            if (ValidateUserInput(response, keyword))
             {
-                DisplayMessage(ex.Message, ConsoleColor.Red);
+                DisplayMessage(chatbotResponses[keyword], ConsoleColor.Green);
+                keywordFound = true;
+                break;
             }
         }
 
-        //Stores the user input and loops when the user does not enter an input
-        static string StoresUserInput()
+        return keywordFound;
+    }
+
+    static bool ValidateUserInput(string response, string keyword)
+    {
+        return response.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+
+    static void EndConversation()
+    {
+        DisplayMessage("Thank you for your time. Have a great day!", ConsoleColor.Yellow);
+    }
+
+    public static void Main(string[] args)
+    {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+
+        new ASCIIArt()
         {
-            string input = Console.ReadLine();
+            
+        };
 
-            while (string.IsNullOrEmpty(input))
-            {
-                DisplayMessage("Please enter a valid input", ConsoleColor.Red);
-                input = Console.ReadLine();
-            }
-            return input;//Stores data into the method using this variable
-        }
-
-        /*
-         * Displays message of the chatbot by parsing the message of the chatbot
-         * into the message variable. The color variable, however, determines the color
-         * of the message displayed by the chatbot.
-         */
-        static void DisplayMessage(string message, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Console.Write("Chatbot:");
-            consoleTyping.TypingEffect(message);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        //Validates if the chatbot can provide answers concerning cybersecurity
-        static bool ValidateUserInput(string response, string keyword)
-        {
-            //Checks if the response variable contains the requirement using the keyword variable
-            return response.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0;
-        }
-
-        //Displays a message below when you end the conversation
-        static void EndConversation()
-        {
-            DisplayMessage("Thank you for your time. Have a great day!", ConsoleColor.Yellow);
-        }
-
-        public static void Main(string[] args)
-        {
-            string filePath = @"C:\Users\Alan Chauke\POE\ascii-text-art (2).txt";
-
-            //validates the existence of the ASCII art file
-            if (File.Exists(filePath))
-            {
-                string ASCII_art = File.ReadAllText(filePath);
-                Console.WriteLine(ASCII_art);
-            }
-            else
-            {
-                //Prints this statement when ASCII text file is not found.
-                Console.Write("ASCII art file not found");
-            }
-
-            DisplayMessage("Hello! Welcome to the Cybersecurity Awareness Bot! How can I assist you today?", ConsoleColor.Green);
-            voiceGreeting.PlayVoiceGreeting();
-            ChatbotInterface();
-        }
+        DisplayMessage("Hello! Welcome to the Cybersecurity Awareness Bot! How can I assist you today?", ConsoleColor.Green);
+        voiceGreeting.PlayVoiceGreeting();
+        ChatbotInterface();
     }
 }
