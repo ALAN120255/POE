@@ -12,20 +12,21 @@ namespace POE
         public ASCIIArt()
         {
 
-            logo();
+            Logo();
 
-         }
-        private void logo()
+        }
+
+        private void Logo()
         {
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
             string newPath = path.Replace("bin\\Debug\\net9.0\\", "");
-            string fullPath = Path.Combine(newPath, "text.png");
+            string fullPath = Path.Combine(newPath, "text.jpg");
 
 
 
             Bitmap image1 = new Bitmap(fullPath);
-            image1 = new Bitmap(image1, new Size(150, 100));
+            image1 = new Bitmap(image1, new Size(100, 100));
 
             for (int height = 0; height < image1.Height; height++)
             {

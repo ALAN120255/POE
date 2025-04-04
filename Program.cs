@@ -105,7 +105,7 @@ public class Program
 
     public static void Main(string[] args)
     {
-        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Blue;
 
         new ASCIIArt()
         {
