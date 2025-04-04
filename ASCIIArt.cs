@@ -23,8 +23,6 @@ namespace POE
             string newPath = path.Replace("bin\\Debug\\net9.0\\", "");
             string fullPath = Path.Combine(newPath, "text.jpg");
 
-
-
             Bitmap image1 = new Bitmap(fullPath);
             image1 = new Bitmap(image1, new Size(100, 100));
 
