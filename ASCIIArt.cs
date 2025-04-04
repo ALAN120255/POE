@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
+
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace POE
 {
@@ -11,37 +11,38 @@ namespace POE
     {
         public ASCIIArt()
         {
-            try
+
+            logo();
+
+         }
+        private void logo()
+        {
+
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string newPath = path.Replace("bin\\Debug\\net9.0\\", "");
+            string fullPath = Path.Combine(newPath, "text.png");
+
+
+
+            Bitmap image1 = new Bitmap(fullPath);
+            image1 = new Bitmap(image1, new Size(150, 100));
+
+            for (int height = 0; height < image1.Height; height++)
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory;
-                string newPath = path.Replace("bin\\Debug\\", "");
-                string fullPath = Path.Combine(newPath, "ascii-text-art.jpg");
-
-                if (!File.Exists(fullPath))
+                for (int width = 0; width < image1.Width; width++)
                 {
-                    throw new FileNotFoundException("The specified image file was not found.", fullPath);
+                    Color pixelColor = image1.GetPixel(width, height);
+                    int color = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+
+                    char asciiDesign = color > 200 ? '.' : color > 150 ? '*' : color > 100 ? 'O' : color > 50 ? '#' : '@';
+                    Console.Write(asciiDesign);
                 }
-
-                Bitmap image = new Bitmap(fullPath);
-                image = new Bitmap(image, new Size(50, 100));
-
-                for (int height = 0; height < image.Height; height++)
-                {
-                    for (int width = 0; width < image.Width; width++)
-                    {
-                        Color pixelColor = image.GetPixel(width, height);
-                        int color = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-
-                        char asciiDesign = color > 200 ? '.' : color > 150 ? '*' : color > 100 ? 'O' : color > 50 ? '#' : '@';
-                        Console.Write(asciiDesign);
-                    }
-                    Console.WriteLine();
-                }
+                Console.WriteLine();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading ASCII art: {ex.Message}");
-            }
+
         }
+
     }
+
 }
+   
