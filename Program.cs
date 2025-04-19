@@ -9,6 +9,7 @@ public class Program
 
     static void ChatbotInterface()
     {
+        //Recognizes certain words in the user's input and displays an appropriate response
         Dictionary<string, string> chatbotResponses = new Dictionary<string, string>()
         {
             { "purpose", "My purpose is to help you tackle every cyber threat you face. What issues are you currently facing?" },
@@ -24,8 +25,12 @@ public class Program
             { "I'm not feeling well", "Oh no! What could be the issue? Is it cyber related?" },
             { "I'm not feeling okay", "Oh no! What could be the issue? Is it cyber related?" },
             { "I'm not feeling good", "I know what you need, you just need help with cybersecurity!" },
+            { "No", "What could be the issue?" },
+            { "Yes", "What could be the issue?" },
+            { "tips about phishing", "Check sender email – Look for misspellings or odd domains.\r\n\r\nDon’t click unknown links – Hover to preview before clicking.\r\n\r\nAvoid urgent requests – Scammers create fake urgency.\r\n\r\nLook for poor grammar – Common in phishing messages.\r\n\r\nVerify with the source – Contact them directly via official channels.\r\n\r\nDon’t download unknown attachments – May contain malware.\r\n\r\nUse 2FA – Adds security even if credentials are stolen.\r\n\r\nUpdate software – Keeps security defenses strong.\r\n\r\nReport suspicious messages – Help others stay safe." },
         };
 
+        //The main program
         try
         {
             DisplayMessage("Before we go any further, let's get to know each other. I'm Chatbot, and you are?", ConsoleColor.Green);
@@ -41,13 +46,16 @@ public class Program
                 Console.Write($"{username}: ");
                 string response = StoresUserInput();
 
-                if (ValidateUserInput(response, "goodbye"))
+                //Ends the whole program when the user says goodbye, bye bye, exit and quit
+                if (ValidateUserInput(response, "goodbye") || ValidateUserInput(response, "bye bye") 
+                    || ValidateUserInput(response, "exit") || ValidateUserInput(response, "quit"))
                 {
                     EndConversation();
                     chatbotConversation = false;
                     break;
                 }
 
+                //For keyword validation
                 CheckKeyword(response, chatbotResponses);
             }
         }
@@ -57,6 +65,7 @@ public class Program
         }
     }
 
+    //Stores the user input and loops when the user does not enter an input
     static string StoresUserInput()
     {
         string input = Console.ReadLine();
@@ -69,6 +78,7 @@ public class Program
         return input;
     }
 
+    //Displays message of the chatbot
     static void DisplayMessage(string message, ConsoleColor color)
     {
         Console.ForegroundColor = color;
@@ -77,6 +87,11 @@ public class Program
         Console.ForegroundColor = ConsoleColor.White;
     }
 
+    /*
+     * Checks if the user's input matches with what's in the chatbotResponses Dictionary.
+     * If the keyword is not found in the Dictionary, It returns a message notifying the user
+     * that it cannot provide information concerning what the user said or asked for.
+     */
     static bool CheckKeyword(string response, Dictionary<string, string> chatbotResponses)
     {
         bool keywordFound = false;
@@ -90,14 +105,21 @@ public class Program
             }
         }
 
+        if (!keywordFound)
+        {
+            DisplayMessage("I cannot provide an answer concerning that, but I can help you with cybersecurity related issues.", ConsoleColor.Yellow);
+        }
+
         return keywordFound;
     }
 
+    //Validates if the chatbot can provide answers concerning cybersecurity
     static bool ValidateUserInput(string response, string keyword)
     {
         return response.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
+    //Displays an end conversation message
     static void EndConversation()
     {
         DisplayMessage("Thank you for your time. Have a great day!", ConsoleColor.Yellow);
@@ -107,10 +129,7 @@ public class Program
     {
         Console.ForegroundColor = ConsoleColor.Blue;
 
-        new ASCIIArt()
-        {
-            
-        };
+        new ASCIIArt() {};
 
         DisplayMessage("Hello! Welcome to the Cybersecurity Awareness Bot! How can I assist you today?", ConsoleColor.Green);
         voiceGreeting.PlayVoiceGreeting();
