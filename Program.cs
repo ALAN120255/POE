@@ -1,4 +1,5 @@
-﻿using POE;
+﻿using MemoryRecallGeneric;
+using POE;
 using POEPart1;
 using System.Drawing;
 
@@ -27,7 +28,7 @@ public class Program
             { "I'm not feeling good", "I know what you need, you just need help with cybersecurity!" },
             { "No", "What could be the issue?" },
             { "Yes", "What could be the issue?" },
-            { "tips about phishing", "Check sender email – Look for misspellings or odd domains.\r\n\r\nDon’t click unknown links – Hover to preview before clicking.\r\n\r\nAvoid urgent requests – Scammers create fake urgency.\r\n\r\nLook for poor grammar – Common in phishing messages.\r\n\r\nVerify with the source – Contact them directly via official channels.\r\n\r\nDon’t download unknown attachments – May contain malware.\r\n\r\nUse 2FA – Adds security even if credentials are stolen.\r\n\r\nUpdate software – Keeps security defenses strong.\r\n\r\nReport suspicious messages – Help others stay safe." },
+            { "tips about ", "Check sender email – Look for misspellings or odd domains.\r\n\r\nDon’t click unknown links – Hover to preview before clicking.\r\n\r\nAvoid urgent requests – Scammers create fake urgency.\r\n\r\nLook for poor grammar – Common in phishing messages.\r\n\r\nVerify with the source – Contact them directly via official channels.\r\n\r\nDon’t download unknown attachments – May contain malware.\r\n\r\nUse 2FA – Adds security even if credentials are stolen.\r\n\r\nUpdate software – Keeps security defenses strong.\r\n\r\nReport suspicious messages – Help others stay safe." },
         };
 
         //The main program
@@ -57,6 +58,12 @@ public class Program
 
                 //For keyword validation
                 CheckKeyword(response, chatbotResponses);
+
+                if (response.IndexOf("remember", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    new MemoryRecall() {};
+                }
+                
             }
         }
         catch (FormatException ex)
@@ -75,6 +82,7 @@ public class Program
             DisplayMessage("Please enter a valid input", ConsoleColor.Red);
             input = Console.ReadLine();
         }
+        
         return input;
     }
 
@@ -87,8 +95,7 @@ public class Program
         Console.ForegroundColor = ConsoleColor.White;
     }
 
-    /*
-     * Checks if the user's input matches with what's in the chatbotResponses Dictionary.
+    /* Checks if the user's input matches with what's in the chatbotResponses Dictionary.
      * If the keyword is not found in the Dictionary, It returns a message notifying the user
      * that it cannot provide information concerning what the user said or asked for.
      */

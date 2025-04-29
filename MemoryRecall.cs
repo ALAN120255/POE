@@ -47,7 +47,6 @@ namespace MemoryRecallGeneric
                 File.CreateText(path);
                 return new List<string>();
             }
-
         }//end of LoadMemory List
     }//end of class
 }//end of namespace
