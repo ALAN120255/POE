@@ -6,7 +6,7 @@ namespace MemoryRecallGeneric
 {
     public class MemoryRecall
     {
-        public MemoryRecall()
+        public MemoryRecall(string userInput)
         {
             //Getting full path of the project
             string fullPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -14,20 +14,30 @@ namespace MemoryRecallGeneric
             //Replacing bin and Debug
             string newPath = fullPath.Replace("bin\\Debug\\net9.0\\", "");
 
-            //combine the new path with the file name
+            //Combining the new path with the file name
             string path = Path.Combine(newPath, "memory_recall.txt");
 
-            //Assign memory to check for users
+            //Assigning memory to check for users
             List<string> memoryStored = LoadMemory(path);
 
-            //Check memory using forach loop
-            foreach (var check in memoryStored)
+            if (memoryStored.Count > 0)
             {
-                Console.WriteLine(check);
-            }
 
+                foreach (var line in memoryStored)
+                {
+                    if (line.Contains(userInput, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No memory found");
+            }
+    
             //Demo data to check the file
-            memoryStored.Add("Owen, what is password");
+            memoryStored.Add(userInput);
 
             //...then store all fav for history
             File.WriteAllLines(path, memoryStored);
@@ -44,7 +54,7 @@ namespace MemoryRecallGeneric
             else
             {
                 //Create the text file if not found
-                File.CreateText(path);
+                File.CreateText(path).Dispose();
                 return new List<string>();
             }
         }//end of LoadMemory List

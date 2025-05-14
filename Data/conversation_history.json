@@ -1,0 +1,50 @@
+[
+  {
+    "Username": "Chatbot",
+    "Message": "Hello, Alan. How may I assist you with cybersecurity today?",
+    "IsUserMessage": false,
+    "Timestamp": "2025-05-03T14:16:34.2710065+02:00"
+  },
+  {
+    "Username": "Alan",
+    "Message": "Remember what we spoke about?",
+    "IsUserMessage": true,
+    "Timestamp": "2025-05-03T14:17:35.5268191+02:00"
+  },
+  {
+    "Username": "Chatbot",
+    "Message": "I\u0027m not sure I understand. Could you phrase your question differently? I\u0027m here to help with cybersecurity questions.",
+    "IsUserMessage": false,
+    "Timestamp": "2025-05-03T14:17:42.5121741+02:00"
+  },
+  {
+    "Username": "Alan",
+    "Message": "Any help with ransomware?",
+    "IsUserMessage": true,
+    "Timestamp": "2025-05-03T14:17:51.5985236+02:00"
+  },
+  {
+    "Username": "Chatbot",
+    "Message": "Ransomware is malicious software that encrypts your files, making them inaccessible until you pay a ransom to the attackers. To protect yourself, maintain regular backups, keep software updated, and be cautious about email attachments and suspicious links.",
+    "IsUserMessage": false,
+    "Timestamp": "2025-05-03T14:18:06.7084458+02:00"
+  },
+  {
+    "Username": "Alan",
+    "Message": "Please remember that I need help with ransomware.",
+    "IsUserMessage": true,
+    "Timestamp": "2025-05-03T14:18:31.57703+02:00"
+  },
+  {
+    "Username": "Chatbot",
+    "Message": "I notice you\u0027ve asked about ransomware before. Is there something specific about ransomware you\u0027d like me to explain in more detail?",
+    "IsUserMessage": false,
+    "Timestamp": "2025-05-03T14:18:39.3229399+02:00"
+  },
+  {
+    "Username": "Alan",
+    "Message": "Quit",
+    "IsUserMessage": true,
+    "Timestamp": "2025-05-03T14:19:34.3303968+02:00"
+  }
+]
