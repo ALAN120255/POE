@@ -18,6 +18,11 @@ public class Program
             { "password", "Strong passwords are your first line of defense. Use a mix of uppercase, lowercase, numbers, and symbols. Avoid using personal information, and never reuse passwords across different accounts. Consider using a password manager to help you create and store complex passwords securely." },
             { "How are you", "I'm doing well, thanks and you?" },
             { "you good", "I'm doing well, thanks and you?" },
+            { "malware", "Malware is malicious software designed to harm your device or steal data. Keep your software updated and avoid downloading files from untrusted sources." },
+            { "ransomware", "Ransomware encrypts your files and demands payment to unlock them. Regularly back up your data to protect against such attacks." },
+            { "worried", "I'm here to help. Let me know what you're worried about, especially if it's cybersecurity-related." },
+            { "frustrated", "It seems like you're frustrated. If you're having trouble with cybersecurity or need help with something specific, feel free to ask, and I'll do my best to assist you! Let me know how I can help." },
+            { "bad day", "It happens to the best of us. Always know that you have a friend in me." },
             { "I'm okay", "That's good to hear! How can I assist you?" },
             { "I'm alright", "That's good to hear! How can I assist you?" },
             { "I'm good", "That's good to hear! How can I assist you?" },
@@ -61,7 +66,7 @@ public class Program
             while (chatbotConversation)
             {
                 RandomCyberMessageDisplayer(randomResponses);
-                
+
                 Console.Write($"{username}: ");
                 string response = StoresUserInput();
 
